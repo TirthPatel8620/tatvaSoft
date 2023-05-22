@@ -1,13 +1,17 @@
 // import logo from './logo.svg';
-import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Link, useNavigate } from "react-router-dom";
 import "./App.css";
+
 import HomePage from "./page/HomePage";
 import AboutUs from "./page/AboutUs";
 import NotFound from "./page/NotFound";
 import { CssStyledPage } from "./page/CssStyledPage";
+import MuiSignin from "./page/MuiSignin"
+import {SignIn} from "./page/SignIn"
 // import LinkPage from './page/LinkPage';
 
 function App() {
+
   return (
     <div>
       {/* <HomePage/>
@@ -42,6 +46,22 @@ function App() {
           CssStyledPage
         </Link>
         <Link
+          to="/MuiSignin"
+          style={{
+            padding: 10,
+          }}
+        >
+          MuiSignin
+        </Link>
+        <Link
+          to="/SignIn"
+          style={{
+            padding: 10,
+          }}
+        >
+          SignIn
+        </Link>
+        <Link
           to="/explore"
           style={{
             padding: 10,
@@ -62,6 +82,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="AboutUs" element={<AboutUs />} />
           <Route path="CssStyledPage" element={<CssStyledPage />} />
+          <Route path="MuiSignin" element={<MuiSignin />} />
+          <Route path="SignIn" element={<SignIn />} />
           <Route path="*" element={<NotFound />} />
 
           {/* </Route> */}

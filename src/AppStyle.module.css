@@ -44,3 +44,19 @@
 margin: 25px;
   background-color: rgba(80, 67, 90, 0.9);
 }
+
+.buttonStyle{
+  margin-top: 20px;
+}
+
+.NamePlate{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.MContainer{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  row-gap: 5px;
+}

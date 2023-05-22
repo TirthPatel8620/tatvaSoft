@@ -25,7 +25,7 @@ export const CssStyledPage = () => {
       <div className={AppStyle.divStyle}>
         This Container containes the external css
       </div>
-      {/* <img src={Logo} alt="not found"/> */}
+      <img src={Logo} alt="not found"/>
       <img src={`${process.env.REACT_APP_HOST}logo192.png`} alt="not found"/>
       <h3>{process.env.REACT_APP_HOST}</h3>
       <h3>{process.env.REACT_APP_EXAMPLE_VAR}</h3>
