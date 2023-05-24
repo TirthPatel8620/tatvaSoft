@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import { Routes, Route, BrowserRouter, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
 import "./App.css";
 
 import HomePage from "./page/HomePage";
@@ -8,6 +8,7 @@ import NotFound from "./page/NotFound";
 import { CssStyledPage } from "./page/CssStyledPage";
 import MuiSignin from "./page/MuiSignin"
 import {SignIn} from "./page/SignIn"
+import {EditProduct} from "./page/EditProduct"
 // import LinkPage from './page/LinkPage';
 
 function App() {
@@ -62,6 +63,14 @@ function App() {
           SignIn
         </Link>
         <Link
+          to="/EditProduct"
+          style={{
+            padding: 10,
+          }}
+        >
+          EditProduct
+        </Link>
+        <Link
           to="/explore"
           style={{
             padding: 10,
@@ -84,6 +93,7 @@ function App() {
           <Route path="CssStyledPage" element={<CssStyledPage />} />
           <Route path="MuiSignin" element={<MuiSignin />} />
           <Route path="SignIn" element={<SignIn />} />
+          <Route path="EditProduct" element={<EditProduct />} />
           <Route path="*" element={<NotFound />} />
 
           {/* </Route> */}

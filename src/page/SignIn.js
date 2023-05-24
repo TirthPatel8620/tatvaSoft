@@ -5,6 +5,7 @@ import { Formik, Form } from "formik";
 // import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import appStyle from "../AppStyle.module.css";
+import * as Yup from "yup";
 // import { useState } from "react";
 
 // function stringAvatar(name) {
@@ -19,79 +20,67 @@ export const SignIn = () => {
     console.log("clicked");
     console.log("form submitted:", value);
 
-    navigate("/");
+    // navigate("/");
   }
   const initialValue = {
     name: "",
     email: "",
   };
+  const validateSchemaform = Yup.object().shape({
+    name: Yup.string().min(3, "Please make sure atlest 3 character in name").required("Required"),
+    email: Yup.string().email("Please enter valid email"),
+  });
   // const [name, setName] = useState("Vinit Mehta");
   // const [email, setEmail] = useState("@gmail.com");
 
   return (
     <div className={appStyle.Container}>
-      {/* <PopupState variant="popover" popupId="demo-popup-popover">
-        {(popupState) => (
-          <div className={appStyle.NamePlate}>
-            <div {...bindTrigger(popupState)}>
-              {/* <Avatar {...stringAvatar("Vinit Mehta")} /> */}
-      {/* <h4>{name}</h4> */}
-      {/* </div>
-            <Popover
-              {...bindPopover(popupState)}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "center",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                }}
-              >
-                <span>Vinit Mehta</span>
-                <LogoutIcon onClick={navigateToHome}></LogoutIcon>
-              </div>
-            </Popover>
-          </div> */}
-
-      {/* </PopupState> */}
-
-      <div className={appStyle.MContainer}>
-        <h2>Sign In</h2>
-        <Formik
-          initialValue={initialValue}
-          // validationSchema={}
-          onSubmit={navigateToHome}
-        >
-          {({ value, handleChange,handleSubmit }) => (
-            <Form onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValue}
+        validationSchema={validateSchemaform}
+        onSubmit={navigateToHome}
+      >
+        {({
+          values,
+          touched,
+          errors,
+          handleSubmit,
+          handleChange,
+          handleBlur,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <div className={appStyle.MContainer}>
+              <h1>Sign in</h1>
               <TextField
                 id="outlined-basic"
                 name="name"
                 label="Name"
                 variant="outlined"
-                // onChange={handleChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
+              {touched.name && errors.name && (
+                <div className={appStyle.error}>{errors.name}</div>
+              )}
               <TextField
-                type="email"
-                name="email"
                 id="outlined-basic"
+                name="email"
                 label="Email"
                 variant="outlined"
-                // onChange={handleChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
-              <Button variant="outlined" type="submit">
+              {touched.email && errors.email && (
+                <div className={appStyle.error}>{errors.email}</div>
+              )}
+
+              <Button type="submit" variant="outlined">
                 SignIn
               </Button>
-            </Form>
-          )}
-        </Formik>
-      </div>
+            </div>
+          </form>
+        )}
+      </Formik>
     </div>
   );
 };
