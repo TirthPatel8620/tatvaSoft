@@ -1,4 +1,4 @@
-import { TextField, Select, MenuItem, InputLabel, Button } from "@mui/material";
+import { TextField, Select, MenuItem, InputLabel, Button, InputAdornment } from "@mui/material";
 import "../EditProduct.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -6,14 +6,14 @@ import { toast } from "react-toastify";
 
 export const EditProduct = () => {
   const initialValue = {
-    firstname: "",
-    lastname: "",
+    bookname: "",
+    price: "",
     category: "",
     description: "",
   };
   const validateSchema = Yup.object().shape({
-    firstname: Yup.string().min(3, "too short").required("required"),
-    lastname: Yup.string().min(3, "too short").required("required"),
+    bookname: Yup.string().required("required"),
+    price: Yup.string().required("required"),
     description: Yup.string().min(20, "Make sure to have aleast 20 charater"),
   });
 
@@ -39,6 +39,7 @@ export const EditProduct = () => {
           Edit Product
         </h1>
       </div>
+      <hr className="heading-below-line"></hr>
       <Formik
         initialValues={initialValue}
         validationSchema={validateSchema}
@@ -55,10 +56,10 @@ export const EditProduct = () => {
           <form onSubmit={handleSubmit}>
             <div className="GridContainer">
               <div className="itemContainer">
-                <span>First Name*</span>
+                <span>Book Name*</span>
                 <TextField
                   id="outlined-basic"
-                  name="firstname"
+                  name="bookname"
                   // label="First Name"
                   variant="outlined"
                   fullWidth
@@ -66,24 +67,25 @@ export const EditProduct = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.firstname && errors.firstname && (
-                  <div className="error">{errors.firstname}</div>
+                {touched.bookname && errors.bookname && (
+                  <div className="error">{errors.bookname}</div>
                 )}
               </div>
               <div className="itemContainer">
-                <span>Last Name*</span>
+                <span>Book Price(Rs)*</span>
                 <TextField
                   id="outlined-basic"
-                  name="lastname"
-                  // label="Last Name"
+                  name="price"
+                  // label="Price"
                   variant="outlined"
                   fullWidth
                   size="small"
+                  startAdornment={<InputAdornment position="start">Rs.</InputAdornment>}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.lastname && errors.lastname && (
-                  <div className="error">{errors.lastname}</div>
+                {touched.price && errors.price && (
+                  <div className="error">{errors.price}</div>
                 )}
               </div>
               <div className="itemContainer">

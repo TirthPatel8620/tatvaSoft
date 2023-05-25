@@ -22,6 +22,13 @@
     margin-top: 50px;
   
   }
+  .heading-below-line{
+    position: relative;
+    top: -30px;
+    width: 25vh;
+    height: 1.5px;
+    background-color: #f14d54;
+  }
   
   .itemContainer{
     /* border: 1px solid black; */
