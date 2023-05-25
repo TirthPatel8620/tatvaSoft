@@ -2,7 +2,8 @@ import { TextField, Select, MenuItem, InputLabel, Button } from "@mui/material";
 import appStyle from "../AppStyle.module.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
-
+import { toast } from "react-toastify";
+import axios from "axios"
 export const EditProduct = () => {
   const initialValue = {
     firstname: "",
@@ -11,15 +12,16 @@ export const EditProduct = () => {
     description: "",
   };
   const validateSchema = Yup.object().shape({
-    firstname: Yup.string()
-      .min(1, "required").required("required"),
-    lastname: Yup.string().min(1,"1 required").required("required"),
+    firstname: Yup.string().min(3, "too short").required("required"),
+    lastname: Yup.string().min(3, "too short").required("required"),
     description: Yup.string().min(20, "Make sure to have aleast 20 charater"),
   });
 
   function onClickSubmit(value) {
     console.log("Form Submitted.....");
     console.log(value);
+    toast("success")
+
   }
   return (
     <div
@@ -47,7 +49,7 @@ export const EditProduct = () => {
           errors,
           touched,
           handleSubmit,
-          handleChnage,
+          handleChange,
           handleBlur,
         }) => (
           <form onSubmit={handleSubmit}>
@@ -61,7 +63,7 @@ export const EditProduct = () => {
                   variant="outlined"
                   fullWidth
                   size="small"
-                  onChange={handleChnage}
+                  onChange={handleChange}
                   onBlur={handleBlur}
                 />
                 {touched.firstname && errors.firstname && (
@@ -77,7 +79,7 @@ export const EditProduct = () => {
                   variant="outlined"
                   fullWidth
                   size="small"
-                  onChange={handleChnage}
+                  onChange={handleChange}
                   onBlur={handleBlur}
                 />
                 {touched.lastname && errors.lastname && (
@@ -86,9 +88,10 @@ export const EditProduct = () => {
               </div>
               <div className={appStyle.itemContainer}>
                 <span>Category</span>
-                <InputLabel id="CategoryList" ></InputLabel>
+                <InputLabel id="CategoryList"></InputLabel>
                 <Select
-                name="category"
+                  defaultValue=""
+                  name="category"
                   style={{
                     width: "20",
                   }}
@@ -98,7 +101,7 @@ export const EditProduct = () => {
                   // label="Category"
                   fullWidth
                   size="small"
-                  onChange={handleChnage}
+                  onChange={handleChange}
                   onBlur={handleBlur}
                 >
                   {/* <MenuItem value={""}></MenuItem> */}
@@ -117,9 +120,12 @@ export const EditProduct = () => {
                   multiline
                   maxRows={4}
                   size="small"
-                  onChange={handleChnage}
+                  onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                 {touched.description && errors.description && (
+                  <div className={appStyle.error}>{errors.description}</div>
+                )}
               </div>
               <div
                 style={{

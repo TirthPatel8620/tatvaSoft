@@ -1,158 +1,20 @@
-
-//backup of EditProduct
 import { TextField, Select, MenuItem, InputLabel, Button } from "@mui/material";
 import appStyle from "../AppStyle.module.css";
 
-export const EditProduct = () => {
-  return (
-    <div
-      style={{
-        fontFamily: "Roboto",
-      }}
-    >
-      <div id={appStyle.heading}>
-        <h1
-          style={{
-            fontSize: "35",
-            fontFamily: "Roboto",
-          }}
-        >
-          Edit Product
-        </h1>
-      </div>
-      <form>
-        <div className={appStyle.GridContainer}>
-          <div className={appStyle.itemContainer}>
-            <span>First Name</span>
-            <TextField
-              id="outlined-basic"
-              // label="First Name"
-              variant="outlined"
-              fullWidth
-              size="small"
-            />
-          </div>
-          <div className={appStyle.itemContainer}>
-            <span>Last Name</span>
-            <TextField
-              id="outlined-basic"
-              // label="Last Name"
-              variant="outlined"
-              fullWidth
-              size="small"
-            />
-          </div>
-          <div className={appStyle.itemContainer}>
-            <span>Category</span>
-            <InputLabel id="CategoryList"></InputLabel>
-            <Select
-              style={{
-                width: "20",
-              }}
-              labelId="CategoryList"
-              id="demo-simple-select"
-              //   value={age}
-              // label="Category"
-              fullWidth
-              size="small"
-            >
-              {/* <MenuItem value={""}></MenuItem> */}
-              <MenuItem value={"Bookcategory"}>Bookcategory</MenuItem>
-              <MenuItem value={"Bookcategory"}>Bookcategory</MenuItem>
-              <MenuItem value={"Bookcategory"}>Bookcategory</MenuItem>
-            </Select>
-          </div>
-          <div className={appStyle.itemContainer}>
-            <span>Description</span>
-            <TextField
-              id="outlined-multiline-flexible"
-              // label="Description"
-              fullWidth
-              multiline
-              maxRows={4}
-              size="small"
-            />
-          </div>
-          <div  style={{
-            position:"relative",
-            // border:"1px solid red",
-            marginTop: "25px",
-            alignItems:"center"
-          }}>
-            <label htmlFor="raised-button-file">
-              <Button
-                variant="raised"
-                component="span"
-                style={{
-                  backgroundColor: "#F14d54",
-                  color: "white",
-                  height: "40px",
-                width: "120px",
-                zIndex:"1"
-                }}
-              >
-                Upload
-              </Button>
-            </label>
-            <input
-              accept="image/*"
-              //   className={classes.input}
-              //   style={{ display:  }}
-              id="raised-button-file"
-              multiple
-              type="file"
-              style={{
-                zIndex:"-1",
-                position:"absolute",
-                left:"25px",
-                top: "10px"
-              }}
-            />
-          </div>
-          <br />
-          {/* <div></div> */}
-
-          <div style={{
-            display:"flex",
-            felxDirection:"row",
-            columnGap: "1vh" 
-          }}>
-            <Button
-              variant="raised"
-              style={{
-                backgroundColor: "#7dc12b",
-                color: "white",
-                height: "40px",
-                width: "100px",
-              }}
-            >
-              Save
-            </Button>
-            <Button
-              variant="raised"
-              style={{
-                backgroundColor: "#F14d54",
-                color: "white",
-                height: "40px",
-                width: "100px",
-              }}
-            >
-              Cancel
-            </Button>
-          </div>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-//backup for registration
-import { TextField, Select, MenuItem, InputLabel, Button } from "@mui/material";
-import appStyle from "../AppStyle.module.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
-
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 export const Registration = () => {
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
+      console.log("user details: ", res.data);
+      setUser(res.data);
+    });
+  }, []);
   const initialValue = {
     firstname: "",
     lastname: "",
@@ -175,17 +37,54 @@ export const Registration = () => {
         "Password must require atleast 1 small letter character"
       )
       .min(8, "Password must require minimum 8 character")
-      .required("Please provide a valid password"),
+      .required("Please provide a valid password"),
     cpassword: Yup.string()
       .label("confirm password")
       .required()
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
 
-  function onClickSubmit(value) {
+  async function onClickSubmit(value) {
     console.log("Form Submitted.....");
     console.log(value);
+
+    const userdata = {
+      userfname: value.firstname,
+      userlname: value.lastname,
+      useremail: value.email,
+    };
+
+   const res = await axios.post("https://jsonplaceholder.typicode.com/posts", userdata);
+   if (res.status === 201) {
+    console.log(res.data.id);
+    toast.success("Form Successfully Submitted....!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
+    //delete
+    axios.delete("https://jsonplaceholder.typicode.com/posts/2").then((res) => {
+      if (res.status === 200) {
+        toast.success("Data Deleted SuccessFully!!!!!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    });
+  }
+
   return (
     <div
       style={{
@@ -365,6 +264,14 @@ export const Registration = () => {
           </form>
         )}
       </Formik>
+      <div>
+        {user.map((item) => (
+          <div key={item.id}>
+            <h3>{item.title}</h3>
+            <span>{item.body}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
 import "./App.css";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import HomePage from "./page/HomePage";
 import AboutUs from "./page/AboutUs";
@@ -9,6 +11,7 @@ import { CssStyledPage } from "./page/CssStyledPage";
 import MuiSignin from "./page/MuiSignin"
 import {SignIn} from "./page/SignIn"
 import {EditProduct} from "./page/EditProduct"
+import {Registration} from "./page/Registration"
 // import LinkPage from './page/LinkPage';
 
 function App() {
@@ -17,6 +20,7 @@ function App() {
     <div>
       {/* <HomePage/>
     <AboutUs/> */}
+     <ToastContainer/>
       <BrowserRouter
         style={{
           padding: 10,
@@ -71,6 +75,14 @@ function App() {
           EditProduct
         </Link>
         <Link
+          to="/Registration"
+          style={{
+            padding: 10,
+          }}
+        >
+          Registration
+        </Link>
+        <Link
           to="/explore"
           style={{
             padding: 10,
@@ -94,6 +106,7 @@ function App() {
           <Route path="MuiSignin" element={<MuiSignin />} />
           <Route path="SignIn" element={<SignIn />} />
           <Route path="EditProduct" element={<EditProduct />} />
+          <Route path="Registration" element={<Registration />} />
           <Route path="*" element={<NotFound />} />
 
           {/* </Route> */}
