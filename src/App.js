@@ -12,6 +12,7 @@ import MuiSignin from "./page/MuiSignin"
 import {SignIn} from "./page/SignIn"
 import {EditProduct} from "./page/EditProduct"
 import {Registration} from "./page/Registration"
+import Login from "./page/Login"
 // import LinkPage from './page/LinkPage';
 
 function App() {
@@ -83,6 +84,14 @@ function App() {
           Registration
         </Link>
         <Link
+          to="/Login"
+          style={{
+            padding: 10,
+          }}
+        >
+          Login
+        </Link>
+        <Link
           to="/explore"
           style={{
             padding: 10,
@@ -107,6 +116,7 @@ function App() {
           <Route path="SignIn" element={<SignIn />} />
           <Route path="EditProduct" element={<EditProduct />} />
           <Route path="Registration" element={<Registration />} />
+          <Route path="Login" element={<Login/>} />
           <Route path="*" element={<NotFound />} />
 
           {/* </Route> */}

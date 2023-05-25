@@ -1,9 +1,9 @@
 import { TextField, Select, MenuItem, InputLabel, Button } from "@mui/material";
-import appStyle from "../AppStyle.module.css";
+import "../EditProduct.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import axios from "axios"
+
 export const EditProduct = () => {
   const initialValue = {
     firstname: "",
@@ -29,7 +29,7 @@ export const EditProduct = () => {
         fontFamily: "Roboto",
       }}
     >
-      <div id={appStyle.heading}>
+      <div id="heading">
         <h1
           style={{
             fontSize: "35",
@@ -53,8 +53,8 @@ export const EditProduct = () => {
           handleBlur,
         }) => (
           <form onSubmit={handleSubmit}>
-            <div className={appStyle.GridContainer}>
-              <div className={appStyle.itemContainer}>
+            <div className="GridContainer">
+              <div className="itemContainer">
                 <span>First Name*</span>
                 <TextField
                   id="outlined-basic"
@@ -67,10 +67,10 @@ export const EditProduct = () => {
                   onBlur={handleBlur}
                 />
                 {touched.firstname && errors.firstname && (
-                  <div className={appStyle.error}>{errors.firstname}</div>
+                  <div className="error">{errors.firstname}</div>
                 )}
               </div>
-              <div className={appStyle.itemContainer}>
+              <div className="itemContainer">
                 <span>Last Name*</span>
                 <TextField
                   id="outlined-basic"
@@ -83,10 +83,10 @@ export const EditProduct = () => {
                   onBlur={handleBlur}
                 />
                 {touched.lastname && errors.lastname && (
-                  <div className={appStyle.error}>{errors.lastname}</div>
+                  <div className="error">{errors.lastname}</div>
                 )}
               </div>
-              <div className={appStyle.itemContainer}>
+              <div className="itemContainer">
                 <span>Category</span>
                 <InputLabel id="CategoryList"></InputLabel>
                 <Select
@@ -110,7 +110,7 @@ export const EditProduct = () => {
                   <MenuItem value={"Bookcategory"}>Bookcategory</MenuItem>
                 </Select>
               </div>
-              <div className={appStyle.itemContainer}>
+              <div className="itemContainer">
                 <span>Description</span>
                 <TextField
                   name="description"
@@ -124,7 +124,7 @@ export const EditProduct = () => {
                   onBlur={handleBlur}
                 />
                  {touched.description && errors.description && (
-                  <div className={appStyle.error}>{errors.description}</div>
+                  <div className="error">{errors.description}</div>
                 )}
               </div>
               <div

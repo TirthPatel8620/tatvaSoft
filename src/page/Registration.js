@@ -1,5 +1,5 @@
 import { TextField, Select, MenuItem, InputLabel, Button } from "@mui/material";
-import appStyle from "../AppStyle.module.css";
+import "../Registration.css"
 
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -54,20 +54,23 @@ export const Registration = () => {
       useremail: value.email,
     };
 
-   const res = await axios.post("https://jsonplaceholder.typicode.com/posts", userdata);
-   if (res.status === 201) {
-    console.log(res.data.id);
-    toast.success("Form Successfully Submitted....!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  }
+    const res = await axios.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      userdata
+    );
+    if (res.status === 201) {
+      console.log(res.data.id);
+      toast.success("Form Successfully Submitted....!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
     //delete
     axios.delete("https://jsonplaceholder.typicode.com/posts/2").then((res) => {
       if (res.status === 200) {
@@ -92,7 +95,12 @@ export const Registration = () => {
         fontSize: "15px",
       }}
     >
-      <div id={appStyle.heading}>
+    <div className="">
+
+      <span className="home-login-home">Home {">"} </span>
+      <span className="home-login-login">Create An Account</span>
+    </div>
+      <div id="heading">
         <h1
           style={{
             fontSize: "35",
@@ -116,8 +124,8 @@ export const Registration = () => {
           handleBlur,
         }) => (
           <form onSubmit={handleSubmit}>
-            <div className={appStyle.GridContainer}>
-              <div className={appStyle.itemContainer}>
+            <div className="GridContainer">
+              <div className="itemContainer">
                 <span>First Name*</span>
                 <TextField
                   id="outlined-basic"
@@ -130,10 +138,10 @@ export const Registration = () => {
                   onBlur={handleBlur}
                 />
                 {touched.firstname && errors.firstname && (
-                  <div className={appStyle.error}>{errors.firstname}</div>
+                  <div className="error">{errors.firstname}</div>
                 )}
               </div>
-              <div className={appStyle.itemContainer}>
+              <div className="itemContainer">
                 <span>Last Name*</span>
                 <TextField
                   id="outlined-basic"
@@ -146,10 +154,10 @@ export const Registration = () => {
                   onBlur={handleBlur}
                 />
                 {touched.lastname && errors.lastname && (
-                  <div className={appStyle.error}>{errors.lastname}</div>
+                  <div className="error">{errors.lastname}</div>
                 )}
               </div>
-              <div className={appStyle.itemContainer}>
+              <div className="itemContainer">
                 <span>Email</span>
                 <TextField
                   id="outlined-basic"
@@ -162,10 +170,10 @@ export const Registration = () => {
                   onBlur={handleBlur}
                 />
                 {touched.email && errors.email && (
-                  <div className={appStyle.error}>{errors.email}</div>
+                  <div className="error">{errors.email}</div>
                 )}
               </div>
-              <div className={appStyle.itemContainer}>
+              <div className="itemContainer">
                 <span>Role</span>
                 <InputLabel id="role"></InputLabel>
                 <Select
@@ -188,7 +196,7 @@ export const Registration = () => {
                   <MenuItem value={"Buyer"}>Buyer</MenuItem>
                 </Select>
                 {touched.role && errors.role && (
-                  <div className={appStyle.error}>{errors.role}</div>
+                  <div className="error">{errors.role}</div>
                 )}
               </div>
               <div>
@@ -213,7 +221,7 @@ export const Registration = () => {
                   onBlur={handleBlur}
                 />
                 {touched.password && errors.password && (
-                  <div className={appStyle.error}>{errors.password}</div>
+                  <div className="error">{errors.password}</div>
                 )}
               </div>
 
@@ -235,7 +243,7 @@ export const Registration = () => {
                   onBlur={handleBlur}
                 />
                 {touched.cpassword && errors.cpassword && (
-                  <div className={appStyle.error}>{errors.cpassword}</div>
+                  <div className="error">{errors.cpassword}</div>
                 )}
               </div>
 
