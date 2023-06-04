@@ -4,6 +4,7 @@ import "../Cart.css";
 import bookimage from "./download.jpeg";
 
 const Cart = () => {
+  var user = JSON.parse(sessionStorage.getItem('user'));
   return (
     <>
       {/* <LogeedNav /> */}
